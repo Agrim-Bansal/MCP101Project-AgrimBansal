@@ -3,8 +3,8 @@
 Servo myservo;  // create servo object to control a servo
 char inp;
 void setup(){
-      Serial.begin(9600);
-      myservo.attach(3);
+      Serial.begin(74880);
+      myservo.attach(5);
       // myservo.write(90);
 }
 
@@ -24,6 +24,6 @@ void loop(){
     else if(inp == 'c'){
         myservo.write(90);
     }
-  delay(100);
+
   }
 }

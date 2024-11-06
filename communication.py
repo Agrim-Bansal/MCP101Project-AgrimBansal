@@ -5,7 +5,7 @@ import atexit
 serialaddress = input('usbModem : ')
 SerialObj = serial.Serial(serialaddress)         # COMxx  format on Windows
                                                         # ttyUSBx format on Linux
-SerialObj.baudrate = 9600                               # set Baud rate to 9600
+SerialObj.baudrate = 74880                              # set Baud rate to 9600
 SerialObj.bytesize = 8                                  # Number of data bits = 8
 SerialObj.parity  ='N'                                  # No parity
 # SerialObj.stopbits = 1                                  # Number of Stop bits = 1
