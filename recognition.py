@@ -7,6 +7,7 @@ yolo = YOLO('yolov8s.pt')
 # Load the video capture
 videoCap = cv2.VideoCapture(0)
 
+
 # Function to get class colors
 def getColours(cls_num):
     base_colors = [(255, 0, 0), (0, 255, 0), (0, 0, 255)]
