@@ -1,0 +1,13 @@
+train: ../train/images
+val: ../valid/images
+test: ../test/images
+
+nc: 3
+names: ['earphones', 'keys', 'phone-earphone-keys']
+
+roboflow:
+  workspace: personal-z85ei
+  project: test-sfswo
+  version: 1
+  license: CC BY 4.0
+  url: https://universe.roboflow.com/personal-z85ei/test-sfswo/dataset/1

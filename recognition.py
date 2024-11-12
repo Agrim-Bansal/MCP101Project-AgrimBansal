@@ -1,8 +1,13 @@
+### This is just an example of how to use the ultralytics library to do object detection on a video stream 
+### Taken from the ultralytics documentation
+### NOT Coded by me  ### Not used in the project 
+### Noting it here for future reference
+
 import cv2
 from ultralytics import YOLO
 
 # Load the model
-yolo = YOLO('yolov8s.pt')
+yolo = YOLO('yolov9c.pt')
 
 # Load the video capture
 videoCap = cv2.VideoCapture(0)
