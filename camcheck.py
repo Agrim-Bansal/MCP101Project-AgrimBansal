@@ -7,7 +7,7 @@ import cv2
 from ultralytics import YOLO
 
 # Load the model
-yolo = YOLO('yolov9c.pt')
+yolo = YOLO('best.pt')
 
 # Load the video capture
 videoCap = cv2.VideoCapture(0)

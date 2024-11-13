@@ -99,10 +99,16 @@ while True:
     
     if dryWet == 'NA':
         print("No objects detected")
+        send_message('c')
         continue
 
     # Send the message to the microcontroller
     send_message(['r', 'l'][dryWet])
     print(['Dry', 'Wet'][dryWet])
     # Wait for 5 seconds
+    time.sleep(5)
+    send_message('c')
     time.sleep(10)
+
+
+    

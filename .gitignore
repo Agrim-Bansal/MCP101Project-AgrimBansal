@@ -6,3 +6,4 @@ runs/
 data/
 captured_image.jpg
 experimental/
+yolov9c.pt
