@@ -8,7 +8,7 @@ from ultralytics import YOLO
 serialaddress = input('usbModem : ')
 SerialObj = serial.Serial(serialaddress)                # COMxx  format on Windows
                                                         # ttyUSBx format on Linux
-SerialObj.baudrate = 74880                             
+SerialObj.baudrate = 9600                             
 SerialObj.bytesize = 8                                 
 SerialObj.parity  = 'N'                                  
 SerialObj.stopbits = 1                                  
@@ -42,8 +42,9 @@ model = YOLO("best.pt")
 def captureAndDetectObjects(confidence_req):
     # Capture image from camera
     cap = cv2.VideoCapture(0)
-    time.sleep(1)
+    time.sleep(0.5)
     ret, frame = cap.read()
+    items = []
 
     if ret:
         # Save the captured image
@@ -52,8 +53,7 @@ def captureAndDetectObjects(confidence_req):
         
         results = model.predict(image_path)[0]
         classes_names = results.names
-        items = []
-
+        # results.show()
         for box in results.boxes:
             if box.conf[0] > confidence_req :
                 items.append(classes_names[int(box.cls[0])])
@@ -77,12 +77,12 @@ objects = {
     'phone-earphone-keys' : 1,
 }
 
-
 # Get the objects and store in a list of 0s and 1s
 # 0 for dry and 1 for wet
-
 def getDryWet():
-    dryWet = map(lambda x: objects[x], captureAndDetectObjects(0.4))
+    dryWet = []
+    for i in captureAndDetectObjects(0.4):
+        dryWet.append(objects[i])
 
     # if there is wet waste in the objects, throw the complete thing into the wet bin to prevent contamination of recyclables
     if 1 in dryWet:
@@ -103,12 +103,11 @@ while True:
         continue
 
     # Send the message to the microcontroller
-    send_message(['r', 'l'][dryWet])
+    send_message(['l', 'r'][dryWet])
     print(['Dry', 'Wet'][dryWet])
     # Wait for 5 seconds
     time.sleep(5)
     send_message('c')
     time.sleep(10)
-
 
     

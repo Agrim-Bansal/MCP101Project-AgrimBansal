@@ -1,11 +1,10 @@
-
 #include <Servo.h>
 Servo myservo;  // create servo object to control a servo
 char inp;
 void setup(){
-      Serial.begin(74880);
+      Serial.begin(9600);
       myservo.attach(5);
-      // myservo.write(90);
+      myservo.write(90);
 }
 
 void loop(){
@@ -15,10 +14,10 @@ void loop(){
     char inp = Serial.read();
 
     Serial.println(inp);   
-    if(inp == 'r'){
+    if(inp == 'l'){
         myservo.write(0);
     }
-    else if(inp == 'l'){
+    else if(inp == 'r'){
         myservo.write(180);
     }
     else if(inp == 'c'){
@@ -27,3 +26,4 @@ void loop(){
 
   }
 }
+
