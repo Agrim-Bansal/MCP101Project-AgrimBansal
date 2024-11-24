@@ -5,7 +5,8 @@ from ultralytics import YOLO
 
 #Setup the communication with the microcontroller 
 
-serialaddress = input('usbModem : ')
+serialaddress = '/dev/tty.usbmodem1101'
+# serialaddress = input('usbModem : ')
 SerialObj = serial.Serial(serialaddress)                # COMxx  format on Windows
                                                         # ttyUSBx format on Linux
 SerialObj.baudrate = 9600                             
@@ -49,7 +50,7 @@ def captureAndDetectObjects(confidence_req):
     if ret:
         # Save the captured image
         image_path = "captured_image.jpg"
-        # cv2.imwrite(image_path, frame)
+        cv2.imwrite(image_path, frame)
         
         results = model.predict(image_path)[0]
         classes_names = results.names
@@ -63,18 +64,10 @@ def captureAndDetectObjects(confidence_req):
     return items
 
 # To take the objects and decide dry or wet 
-# objects = {
-#     '' : 0,
-#     'bottle' : 1,
-#     'cup' : 1,
-#     'glass' : 1,
-# }
-
 # Assign 1 for wet and 0 for dry
 objects = {
-    'earphones' : 0,
-    'keys' : 1,
-    'phone-earphone-keys' : 1,
+    'bottle' : 0,
+    'peels' : 1,
 }
 
 # Get the objects and store in a list of 0s and 1s
@@ -106,8 +99,8 @@ while True:
     send_message(['l', 'r'][dryWet])
     print(['Dry', 'Wet'][dryWet])
     # Wait for 5 seconds
-    time.sleep(5)
+    time.sleep(2)
     send_message('c')
-    time.sleep(10)
+    time.sleep(2)
 
     
